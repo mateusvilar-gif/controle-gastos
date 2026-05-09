@@ -1,4 +1,17 @@
 import json
+import requests
+def cotacao_dolar():
+    url = "https://economia.awesomeapi.com.br/json/last/USD-BRL"
+
+    resposta = requests.get(url)
+
+    if resposta.status_code == 200:
+        dados = resposta.json()
+        valor = dados["USDBRL"]["bid"]
+        print(f"\nCotação do dólar hoje: R$ {valor}")
+    else:
+        print("Erro ao buscar cotação.")
+
 
 ARQUIVO = "gastos.json"
 
@@ -20,7 +33,8 @@ def mostrar_menu():
     print("\n=== Controle de Gastos ===")
     print("1 - Adicionar gasto")
     print("2 - Listar gastos")
-    print("3 - Sair")
+    print("3 - Ver cotação do dólar")
+    print("4 - Sair")
 
 
 def main():
@@ -43,6 +57,9 @@ def main():
                 print(f"{g['nome']} - R${g['valor']}")
 
         elif opcao == "3":
+            cotacao_dolar()
+
+        elif opcao == "4":
             print("Saindo...")
             break
 
@@ -51,4 +68,5 @@ def main():
 
 
 if __name__ == "__main__":
+    print("VERSAO NOVA")
     main()
