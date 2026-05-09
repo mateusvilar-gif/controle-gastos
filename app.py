@@ -7,7 +7,7 @@ app = Flask(__name__)
 def home():
     valor = "indisponivel"
     try:
-        r = requests.get("https://economia.awesomeapi.com.br/json/last/USD-BRL", timeout=5)
+       r = requests.get("https://economia.awesomeapi.com.br/json/last/USD-BRL", timeout=10)
         dados = r.json()
         if "USDBRL" in dados:
             valor = dados["USDBRL"]["bid"]
