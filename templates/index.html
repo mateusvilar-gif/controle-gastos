@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de Gastos</title>
+    <style>
+        body { font-family: Arial; background: #0d1117; color: white; padding: 20px; }
+        h1 { color: #00bcd4; }
+        input, button, select { padding: 8px; margin: 5px; border-radius: 5px; border: none; }
+        button { background: #00bcd4; color: white; cursor: pointer; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #333; padding: 10px; text-align: left; }
+        th { background: #1e2a3a; color: #00bcd4; }
+        tr:hover { background: #1a1a2e; }
+    </style>
+</head>
+<body>
+    <h1>💰 Controle de Gastos</h1>
+    <p>Cotação atual do dólar: <strong>R$ {{ valor }}</strong></p>
+
+    <h2>Adicionar Gasto</h2>
+    <form action="/adicionar" method="POST">
+        <input type="text" name="descricao" placeholder="Descrição" required>
+        <input type="number" name="valor" step="0.01" placeholder="Valor R$" required>
+        <input type="text" name="categoria" placeholder="Categoria" required>
+        <button type="submit">➕ Salvar</button>
+    </form>
+
+    <h2>Gastos Registrados</h2>
+    <table>
+        <tr>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Categoria</th>
+            <th>Data</th>
+        </tr>
+        {% for gasto in gastos %}
+        <tr>
+            <td>{{ gasto.descricao }}</td>
+            <td>R$ {{ gasto.valor }}</td>
+            <td>{{ gasto.categoria }}</td>
+            <td>{{ gasto.created_at[:10] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
